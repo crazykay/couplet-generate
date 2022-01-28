@@ -119,6 +119,31 @@
       justify-content: space-around;
       row-gap: .5em;
     }
+    footer {
+      position: fixed;
+      bottom: 0;
+      display: flex;
+      height: 3em;
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+      background-image: linear-gradient(
+        65deg,
+      hsl(118deg 100% 94%) 0%,
+      hsl(87deg 83% 92%) 19%,
+      hsl(62deg 71% 90%) 27%,
+      hsl(45deg 100% 91%) 34%,
+      hsl(39deg 100% 91%) 41%,
+      hsl(32deg 100% 92%) 47%,
+      hsl(23deg 100% 93%) 53%,
+      hsl(10deg 100% 94%) 59%,
+      hsl(350deg 100% 95%) 66%,
+      hsl(332deg 100% 95%) 73%,
+      hsl(317deg 100% 95%) 81%,
+      hsl(298deg 86% 95%) 100%
+      );
+    }
   </style>
 </head>
 
@@ -142,6 +167,10 @@
       </div>
     </div>
   </main>
+  <footer>
+    <span>字体来源：<a href="https://www.foundertype.com/index.php/FontInfo/index/id/165.html">方正小篆体</a></span>
+    <spna>Made by ♥CK</spna>
+  </footer>
   <script>
     function submitCouplet() {
       const topCouplet = document.querySelector('input[name="top"]').value.split('').reverse().join('');
