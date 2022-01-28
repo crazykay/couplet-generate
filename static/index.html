@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>第一个网站</title>
+    <style>
+        @font-face {
+            font-family: "fzxz";
+            src: url("./font/FZXZTFW.ttf");
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        main {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            column-gap: 2em;
+            margin: 3em;
+        }
+        .preload {
+            font-family: 'fzxz';
+            visibility: hidden;
+        }
+        .tool-box {
+            display: flex;
+            flex-flow: column;
+            row-gap: 1em;
+        }
+        .container {
+            font-family: 'fzxz';
+            font-size: 6em;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            row-gap: 0.5em;
+        }
+        .couplet-box{
+            background: firebrick;
+            /* border: 8px solid rgb(241, 211, 37); */
+            box-shadow: inset 2px 4px 11px 3px darkred;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .top {
+            font-size: .75em;
+            min-height: 2em;
+            min-width: 5em;
+        }
+        .left, .right {
+            min-height: 7em;
+            min-width: 2em;
+            padding: 0.5em 0;
+        }
+        .container .bottom-box {
+            display: flex;
+            flex-flow: column-reverse;
+            writing-mode: tb;
+            width: 100%;
+            justify-content: space-around;
+            row-gap: .5em;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="tool-box">
+            <h1>小篆对联工具</h1>
+            <span class="preload">加载</span>
+            <label for="">上联：<input type="text" name='right' value="笑我年光同蔗尾"></label>
+            <label for="">下联：<input type="text" name='left' value="看他春色上眉梢"></label>
+            <label for="">横批：<input type="text" name='top' value="峰回路转"></label>
+            <button class="submit">submit</button>
+        </div>
+        <div class="container">
+            <div class="top couplet-box"></div>
+            <div class="bottom-box">
+                <div class="left couplet-box"></div>
+                <div class="right couplet-box"></div>
+            </div>
+        </div>
+    </main>
+    <script>
+        function submitCouplet() {
+            const topCouplet  = document.querySelector('input[name="top"]').value;
+            const leftCouplet  = document.querySelector('input[name="left"]').value;
+            const rightCouplet  = document.querySelector('input[name="right"]').value
+
+            document.querySelector('.container .top').innerHTML = topCouplet;
+            document.querySelector('.container .left').innerHTML = leftCouplet;
+            document.querySelector('.container .right').innerHTML = rightCouplet;
+        }
+
+        document.querySelector('button.submit').addEventListener('click', event => {
+            submitCouplet();
+        });
+    </script>
+</body>
+</html>
