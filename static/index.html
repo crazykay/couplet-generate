@@ -1,105 +1,172 @@
 <!doctype html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>第一个网站</title>
-    <style>
-        @font-face {
-            font-family: "fzxz";
-            src: url("./font/FZXZTFW.ttf");
-        }
-        html, body {
-            margin: 0;
-            padding: 0;
-        }
-        main {
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: center;
-            align-items: center;
-            column-gap: 2em;
-            margin: 3em;
-        }
-        .preload {
-            font-family: 'fzxz';
-            visibility: hidden;
-        }
-        .tool-box {
-            display: flex;
-            flex-flow: column;
-            row-gap: 1em;
-        }
-        .container {
-            font-family: 'fzxz';
-            font-size: 6em;
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            row-gap: 0.5em;
-        }
-        .couplet-box{
-            background: firebrick;
-            /* border: 8px solid rgb(241, 211, 37); */
-            box-shadow: inset 2px 4px 11px 3px darkred;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .top {
-            font-size: .75em;
-            min-height: 2em;
-            min-width: 5em;
-        }
-        .left, .right {
-            min-height: 7em;
-            min-width: 2em;
-            padding: 0.5em 0;
-        }
-        .container .bottom-box {
-            display: flex;
-            flex-flow: column-reverse;
-            writing-mode: tb;
-            width: 100%;
-            justify-content: space-around;
-            row-gap: .5em;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>小篆对联工具</title>
+  <style>
+    @font-face {
+      font-family: "fzxz";
+      src: url("./font/FZXZTFW.ttf");
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+      column-gap: 5em;
+      row-gap: 5em;
+      min-height: 100vh;
+      background-image: linear-gradient(20deg,
+          hsl(183deg 64% 95%) 0%,
+          hsl(192deg 75% 94%) 11%,
+          hsl(200deg 83% 95%) 20%,
+          hsl(208deg 86% 95%) 29%,
+          hsl(217deg 83% 95%) 36%,
+          hsl(231deg 71% 95%) 42%,
+          hsl(255deg 55% 95%) 47%,
+          hsl(282deg 42% 93%) 52%,
+          hsl(314deg 42% 93%) 58%,
+          hsl(334deg 56% 93%) 65%,
+          hsl(348deg 64% 92%) 76%,
+          hsl(0deg 65% 92%) 100%);
+    }
+
+    .preload {
+      font-family: 'fzxz';
+      visibility: hidden;
+    }
+
+    .tool-box {
+      display: flex;
+      flex-flow: column;
+      row-gap: 2em;
+    }
+
+    .tool-box .pushable {
+      background: hsl(340deg 100% 32%);
+      border-radius: 12px;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      outline-offset: 4px;
+    }
+
+    .tool-box .front {
+      display: block;
+      padding: 12px 42px;
+      border-radius: 12px;
+      font-size: 1.25rem;
+      background: hsl(345deg 100% 50%);
+      color: white;
+      transform: translateY(-6px);
+      will-change: transform;
+      transition: transform 250ms;
+    }
+
+    .tool-box .pushable:hover .front {
+      transform: translateY(-6px);
+    }
+
+    .tool-box .pushable:active .front {
+      transform: translateY(-2px);
+    }
+
+    .tool-box .pushable:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    .container {
+      font-family: 'fzxz';
+      font-size: 6em;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      row-gap: 0.5em;
+    }
+
+    .couplet-box {
+      background: firebrick;
+      /* border: 8px solid rgb(241, 211, 37); */
+      box-shadow: inset 2px 4px 11px 3px darkred;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .top {
+      font-size: .75em;
+      min-height: 2em;
+      min-width: 5em;
+    }
+
+    .left,
+    .right {
+      min-height: 7em;
+      min-width: 2em;
+      padding: 0.5em 0;
+    }
+
+    .container .bottom-box {
+      display: flex;
+      flex-flow: column-reverse;
+      writing-mode: tb;
+      width: 100%;
+      justify-content: space-around;
+      row-gap: .5em;
+    }
+  </style>
 </head>
+
 <body>
-    <main>
-        <div class="tool-box">
-            <h1>小篆对联工具</h1>
-            <span class="preload">加载</span>
-            <label for="">上联：<input type="text" name='right' value="笑我年光同蔗尾"></label>
-            <label for="">下联：<input type="text" name='left' value="看他春色上眉梢"></label>
-            <label for="">横批：<input type="text" name='top' value="峰回路转"></label>
-            <button class="submit">submit</button>
-        </div>
-        <div class="container">
-            <div class="top couplet-box"></div>
-            <div class="bottom-box">
-                <div class="left couplet-box"></div>
-                <div class="right couplet-box"></div>
-            </div>
-        </div>
-    </main>
-    <script>
-        function submitCouplet() {
-            const topCouplet  = document.querySelector('input[name="top"]').value;
-            const leftCouplet  = document.querySelector('input[name="left"]').value;
-            const rightCouplet  = document.querySelector('input[name="right"]').value
+  <main>
+    <div class="tool-box">
+      <h1>小篆对联工具</h1>
+      <span class="preload">加载</span>
+      <label for="">上联：<input type="text" name='right' value="笑我年光同蔗尾"></label>
+      <label for="">下联：<input type="text" name='left' value="看他春色上眉梢"></label>
+      <label for="">横批：<input type="text" name='top' value="峰回路转"></label>
+      <button class="submit pushable">
+        <span class="front">Push me</span>
+      </button>
+    </div>
+    <div class="container">
+      <div class="top couplet-box"></div>
+      <div class="bottom-box">
+        <div class="left couplet-box"></div>
+        <div class="right couplet-box"></div>
+      </div>
+    </div>
+  </main>
+  <script>
+    function submitCouplet() {
+      const topCouplet = document.querySelector('input[name="top"]').value.split('').reverse().join('');
+      const leftCouplet = document.querySelector('input[name="left"]').value;
+      const rightCouplet = document.querySelector('input[name="right"]').value;
 
-            document.querySelector('.container .top').innerHTML = topCouplet;
-            document.querySelector('.container .left').innerHTML = leftCouplet;
-            document.querySelector('.container .right').innerHTML = rightCouplet;
-        }
-
-        document.querySelector('button.submit').addEventListener('click', event => {
-            submitCouplet();
-        });
-    </script>
+      document.querySelector('.container .top').innerHTML = topCouplet;
+      document.querySelector('.container .left').innerHTML = leftCouplet;
+      document.querySelector('.container .right').innerHTML = rightCouplet;
+    }
+    function inputWatch(e) {
+      console.log(e.target.name);
+      submitCouplet();
+    }
+    document.querySelectorAll('input').forEach(element => element.addEventListener('input', inputWatch))
+    document.querySelector('button.submit').addEventListener('click', event => {
+      submitCouplet();
+    });
+  </script>
 </body>
+
 </html>
